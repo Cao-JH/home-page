@@ -8,9 +8,15 @@
         <div class="text-top">
           <div class="text-top-right">最常222123213去</div>
           <div class="text-top-left">
-            <div class="point favorite"></div>
-            <div class="point edit"></div>
-            <div class="point delete"></div>
+            <div class="point favorite">
+              <span class="iconfont icon-shoucang"></span>
+            </div>
+            <div class="point edit">
+              <span class="iconfont icon-bianji"></span>
+            </div>
+            <div class="point delete">
+              <span class="iconfont icon-shanchu"></span>
+            </div>
           </div>
         </div>
         <div class="text-bottom">
@@ -85,6 +91,10 @@ import { ref, reactive } from "vue";
             margin-left: 4px;
             border-radius: 50%;
             background-color: #000;
+          }
+
+          .iconfont {
+            font-size: 10px;
           }
 
           .delete {

@@ -23,15 +23,20 @@
         <div class="search">
           <el-dropdown>
             <div class="search-left">
-              <span class="iconfont icon-baidu"></span>
+              <!-- <span class="iconfont"></span> -->
+              <img class="iconfont" :src="engineIcon" />
             </div>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item
                   v-for="engine in searchEngine"
                   @click="selectEngine(engine)"
-                  >{{ engine.label }}</el-dropdown-item
                 >
+                  <img class="icon" :src="engine.path" alt="" />
+                  <span>
+                    {{ engine.label }}
+                  </span>
+                </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -54,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, computed } from "vue";
 
 // 搜索内容
 const searchValue = ref({
@@ -63,14 +68,18 @@ const searchValue = ref({
 });
 // 搜索引擎
 const searchEngine = ref([
-  { label: "百度", value: "baidu" },
-  { label: "谷歌", value: "google" },
-  { label: "必应", value: "biying" },
+  { label: "百度", value: "baidu", path: "src/assets/img/baidu.png" },
+  { label: "谷歌", value: "guge", path: "src/assets/img/guge.png" },
+  { label: "必应", value: "biying", path: "src/assets/img/biying.png" },
 ]);
 // 选择引擎
 const selectEngine = (engine) => {
   searchValue.value.engine = engine.value;
 };
+// 图片路径
+const engineIcon = computed(() => {
+  return `src/assets/img/${searchValue.value.engine}.png`;
+});
 // 打开网页
 const openSearch = () => {
   const searchResult = searchValue.value.result;
@@ -78,10 +87,12 @@ const openSearch = () => {
     case "baidu":
       window.open(`https://www.baidu.com/s?wd=${searchResult}`);
       break;
-    case "google":
+    case "guge":
       window.open(`https://www.google.com/search?q=${searchResult}`);
+      break;
     case "biying":
       window.open(`https://www.bing.com/search?q=${searchResult}`);
+      break;
     default:
       break;
   }
@@ -135,16 +146,16 @@ const openSearch = () => {
     box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
 
     .search-left {
-      width: 36px;
+      width: 34px;
       line-height: 28px;
       font-size: 14px;
       color: @textFont;
       display: flex;
       align-items: center;
 
-      .icon-baidu {
-        font-size: 18px;
-        margin: 0 5px;
+      .iconfont {
+        width: 24px;
+        height: 24px;
       }
     }
 
@@ -216,5 +227,11 @@ const openSearch = () => {
 
 :deep(.el-tooltip__trigger:focus-visible) {
   outline: unset;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
 }
 </style>

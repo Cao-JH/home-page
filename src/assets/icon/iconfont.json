@@ -6,32 +6,53 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9841814",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "10232780",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e78d",
+      "unicode_decimal": 59277
+    },
+    {
+      "icon_id": "12939974",
+      "name": "编辑",
+      "font_class": "bianji",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "14037582",
+      "name": "必应",
+      "font_class": "biying",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "14055556",
+      "name": "百度",
+      "font_class": "baidu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "28066126",
+      "name": "谷歌",
+      "font_class": "guge",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "6270980",
       "name": "三角形",
       "font_class": "jiantou",
       "unicode": "e6bd",
       "unicode_decimal": 59069
-    },
-    {
-      "icon_id": "17343140",
-      "name": "必应 ",
-      "font_class": "biying",
-      "unicode": "e62e",
-      "unicode_decimal": 58926
-    },
-    {
-      "icon_id": "18166606",
-      "name": "百度",
-      "font_class": "baidu",
-      "unicode": "e8cb",
-      "unicode_decimal": 59595
-    },
-    {
-      "icon_id": "28410538",
-      "name": "谷歌",
-      "font_class": "guge",
-      "unicode": "e664",
-      "unicode_decimal": 58980
     },
     {
       "icon_id": "592049",
