@@ -1,25 +1,31 @@
 <template>
   <div class="bar-box">
-    <el-row :gutter="50" class="row">
-      <el-col :span="6" class="avatar-box">
+    <el-row :gutter="20" class="row">
+      <el-col :span="4" class="avatar-box">
         <div class="avatar-outer">
           <div class="avatar-inner">
             <img src="@/assets/img/avatar.jpg" alt="" />
           </div>
         </div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="5">
         <div class="component"></div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="5">
         <div class="component"></div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="5">
+        <div class="component"></div>
+      </el-col>
+      <el-col :span="5">
         <div class="component"></div>
       </el-col>
     </el-row>
     <el-row :gutter="20" class="row">
-      <el-col :span="18" :offset="6">
+      <el-col :span="5">
+        <div class="component"></div>
+      </el-col>
+      <el-col :span="9">
         <div class="search">
           <el-dropdown>
             <div class="search-left">
@@ -53,8 +59,14 @@
           </div>
         </div>
       </el-col>
+      <el-col :span="5">
+        <div class="component"></div>
+      </el-col>
+      <el-col :span="5">
+        <div class="component"></div>
+      </el-col>
     </el-row>
-    <div class="back-block"></div>
+    <!-- <div class="back-block"></div> -->
   </div>
 </template>
 
@@ -101,8 +113,9 @@ const openSearch = () => {
 
 <style scoped lang="less">
 .bar-box {
-  padding: 0 30px;
-  position: relative;
+  height: 100%;
+  width: 100%;
+  min-width: 500px;
 
   .avatar-box {
     display: flex;
@@ -137,8 +150,7 @@ const openSearch = () => {
     line-height: 28px;
     align-items: center;
     position: relative;
-    max-width: 60vw;
-    min-width: 40vw;
+    width: 100%;
     height: 40px;
     padding: 12px;
     border-radius: 12px;
@@ -193,26 +205,13 @@ const openSearch = () => {
   }
 
   .row {
-    margin-bottom: 20px;
     z-index: 9;
   }
 
   .component {
     width: 200px;
-    height: 100px;
+    height: 120px;
     border-radius: 30px;
-    background: @background;
-    box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  }
-
-  .back-block {
-    position: absolute;
-    left: 0;
-    top: -40px;
-    z-index: 3;
-    width: 380px;
-    height: 210px;
-    border-bottom-right-radius: 150px;
     background: @background;
     box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   }

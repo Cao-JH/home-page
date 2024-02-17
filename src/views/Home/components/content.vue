@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref } from "vue";
-import Tab from "./tab.vue";
+import Tab from "./indexTab.vue";
 
 const tabs = ref([
   {
@@ -27,8 +27,10 @@ const tabs = ref([
 
 <style scoped lang="less">
 .content-box {
-  width: 90vw;
-  min-height: 470px;
+  width: 100%;
+  height: 100%;
+  min-width: 500px;
+  min-height: 263px;
   margin: 0 auto;
   position: relative;
   padding: 20px;
@@ -39,7 +41,8 @@ const tabs = ref([
   .content-main {
     margin-top: 20px;
     width: 100%;
-    min-height: 365px;
+    height: calc(100% - 60px);
+    // min-height: 365px;
     border-radius: 10px;
     background: @background;
     box-shadow: inset 5px 3px 20px #bcbcbc, inset -10px -10px 25px #fefefe;

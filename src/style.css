@@ -7,3 +7,13 @@ html,body,#app {
   width: 100%;
   height: 100%;
 }
+
+@font-face {
+  font-family: 'MiaoZi';
+  src: url('/src/assets/fonts/miaozi-sheyingti-2.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'ErZhiYuan';
+  src: url('/src/assets/fonts/AaErZhiYuan-2.ttf') format('truetype'),
+}

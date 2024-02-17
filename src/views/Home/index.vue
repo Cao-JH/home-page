@@ -1,72 +1,42 @@
 <template>
   <div id="main-content">
-    <div id="top-box">
-      
-    </div>
-    <div id="search">
+    <div id="top-box"></div>
+    <div id="info-box" ref="infoBox">
       <Bar />
     </div>
-    <div id="body-box">
+    <div id="body-box" ref="bodyBox">
       <Content />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import Bar from './components/bar.vue'
-import Content from './components/content.vue'
+import { ref, getCurrentInstance, onMounted } from "vue";
+import Bar from "./components/bar.vue";
+import Content from "./components/content.vue";
 
+onMounted(() => {
+  changeHeight();
+});
+
+// 动态修改页面内容高度
+const infoBox = ref();
+const bodyBox = ref();
+const changeHeight = () => {
+  const currentInfoHeight = infoBox.value.clientHeight;
+  const windowHeight = document.documentElement.clientHeight;
+  const bodyHeight = windowHeight - currentInfoHeight - 80;
+  bodyBox.value.style.height = bodyHeight + "px";
+};
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 #main-content {
   background: @background;
-  padding: 40px 0;
-  
-  // #top-box {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   height: 40px;
-  //   width: 100%;
-  //   padding: 0 20px;
+  padding: 40px 80px;
+  min-height: 100%;
 
-  //   .left-box {
-  //     border: 1px solid #000;
-  //     height: 5vh;
-  //     width: 50px;
-  //   }
-
-  //   .right-box {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     align-items: center;
-
-  //     #person-info {
-  //       display: flex;
-  //       justify-content: space-between;
-  //       align-items: center;
-
-  //       .avatar {
-  //         width: 40px;
-  //         height: 40px;
-          
-  //         img {
-  //           width: 100%;
-  //           height: 100%;
-  //         }
-  //       }
-  
-  //       .username {
-  //         border: 1px solid #000;
-  //       }
-  //     }
-  //   }
-  
-  // }
-
-  #search {
+  #info-box {
     width: 100%;
   }
 
