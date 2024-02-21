@@ -1,5 +1,9 @@
 <template>
   <div id="favorite-content">
+    <div class="favorite-title">
+      <span class="title">这是标题</span>
+      <div></div>
+    </div>
     <div class="favorite-box">
       <div class="avatar-box">
         <img src="@/assets/img/avatar.jpg" alt="" />
@@ -9,13 +13,13 @@
           <div class="text-top-right">最常222123213去</div>
           <div class="text-top-left">
             <div class="point favorite">
-              <span class="iconfont icon-shoucang"></span>
+              <span class="icon-shoucang iconfont"></span>
             </div>
             <div class="point edit">
-              <span class="iconfont icon-bianji"></span>
+              <span class="icon-bianji iconfont"></span>
             </div>
             <div class="point delete">
-              <span class="iconfont icon-shanchu"></span>
+              <span class="icon-shanchu iconfont"></span>
             </div>
           </div>
         </div>
@@ -37,8 +41,20 @@ import { ref, reactive } from "vue";
 #favorite-content {
   padding: 20px;
 
+  .favorite-title {
+    width: 100%;
+    height: 24px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-family: 'ErZhiYuan', sans-serif;
+    font-style: italic;
+    color: @titleFont;
+    padding-left: 20px;
+    border-bottom: 2px solid #000;
+  }
+
   .favorite-box {
-    width: 200px;
+    width: 210px;
     height: 80px;
     padding: 10px;
     border-radius: 10px;
@@ -46,6 +62,7 @@ import { ref, reactive } from "vue";
     box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
     display: flex;
     align-items: center;
+    transition: transform 0.5s ease;
 
     .avatar-box {
       width: 50px;
@@ -66,47 +83,65 @@ import { ref, reactive } from "vue";
       justify-content: flex-start;
 
       .text-top {
-        width: 120px;
+        width: 130px;
         height: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         .text-top-right {
-          max-width: 80px;
-          font-size: 14px;
+          width: 80px;
+          font-size: 13px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .text-top-left {
-          width: 40px;
+          width: 50px;
           display: flex;
           flex-direction: row;
 
           .point {
-            width: 9px;
-            height: 9px;
+            width: 12px;
+            height: 12px;
             margin-left: 4px;
             border-radius: 50%;
-            background-color: #000;
-          }
+            text-align: center;
+            transition: transform 0.5s ease;
 
-          .iconfont {
-            font-size: 10px;
+            .iconfont {
+              opacity: 0;
+              transition: opacity 0.5s ease;
+            }
+
+            &:hover {
+              transform: scale(1.5);
+
+              .iconfont {
+                opacity: 1;
+              }
+            }
           }
 
           .delete {
             background-color: @delete;
+            line-height: 12px;
+            font-size: 7px;
           }
 
           .favorite {
             background-color: @favorite;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
           }
 
           .edit {
             background-color: @edit;
+            line-height: 12px;
+            font-size: 8px;
           }
         }
       }
@@ -118,7 +153,7 @@ import { ref, reactive } from "vue";
         color: @textFont;
 
         .text-direction {
-          font-size: 12px;
+          font-size: 11px;
           line-height: 1.3;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -127,6 +162,10 @@ import { ref, reactive } from "vue";
           text-overflow: ellipsis;
         }
       }
+    }
+
+    &:hover {
+      transform: scale(1.03);
     }
   }
 }

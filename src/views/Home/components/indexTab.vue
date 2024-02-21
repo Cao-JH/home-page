@@ -32,6 +32,7 @@ const changeTab = (tab) => {
   flex-wrap: wrap;
   padding: 0.25rem;
   font-size: 14px;
+  font-family: 'ErZhiYuan', sans-serif;
 }
 
 .tabs .radio {
