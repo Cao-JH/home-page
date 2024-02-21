@@ -25,7 +25,7 @@ const bodyBox = ref();
 const changeHeight = () => {
   const currentInfoHeight = infoBox.value.clientHeight;
   const windowHeight = document.documentElement.clientHeight;
-  const bodyHeight = windowHeight - currentInfoHeight - 80;
+  const bodyHeight = windowHeight - currentInfoHeight - 120;
   bodyBox.value.style.height = bodyHeight + "px";
 };
 </script>
@@ -38,6 +38,7 @@ const changeHeight = () => {
 
   #info-box {
     width: 100%;
+    margin-bottom: 40px;
   }
 
   #body-box {
