@@ -30,38 +30,41 @@ const changeTab = (tab) => {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 0.25rem;
+  padding: 4px;
   font-size: 14px;
   font-family: 'MiaoZi', sans-serif;
-}
 
-.tabs .radio {
-  text-align: center;
-}
+  .radio {
+    text-align: center;
 
-.tabs .radio input {
-  display: none;
-}
+    input {
+      display: none;
+    }
 
-.tabs .radio .name {
-  width: 100px;
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
-  border: none;
-  padding: 0.5rem 0;
-  margin-right: 10px;
-  color: rgba(51, 65, 85, 1);
-  transition: all 0.15s ease-in-out;
-  border-radius: 7px;
-  background: @background;
-  box-shadow: inset 5px 5px 10px #cacaca, inset -5px -5px 10px #f6f6f6;
-}
+    .name {
+      width: 100px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      padding: 0.5rem 0;
+      margin-right: 10px;
+      color: rgba(51, 65, 85, 1);
+      transition: all 0.15s ease-in-out;
+      border-radius: 8px;
+      background: @background;
+      box-shadow: inset 5px 5px 10px #cacaca, inset -5px -5px 10px #f6f6f6;
 
-.tabs .radio input:checked + .name {
-  background-color: #fff;
-  font-weight: 600;
+      &:hover {
+        background-color: lighten(@background, 10%);
+      }
+    }
+
+    input:checked + .name {
+      background-color: #fff;
+      font-weight: 600;
+    }
+  }
 }
 </style>

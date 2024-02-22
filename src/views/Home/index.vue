@@ -30,9 +30,12 @@ const changeHeight = () => {
 };
 </script>
 
-<style scoped lang="less">
-#main-content {
+<style lang="less">
+body {
   background: @background;
+}
+
+#main-content {
   padding: 40px 80px;
   min-height: 100%;
 

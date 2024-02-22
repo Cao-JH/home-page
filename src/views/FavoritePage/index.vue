@@ -13,11 +13,11 @@
         <div>
           <div class="favorite-boxs">
             <div class="favorite-title">
-              <span class="title">{{ element.label }}</span>
-              <div></div>
+              <div class="title">{{ element.label }}</div>
+              <div class="icon-bianji iconfont"></div>
             </div>
             <div class="favorites-box">
-              <div class="favorite-box" v-for="item in element.favorites" :key="item.id">
+              <div class="favorite-box main-box" v-for="item in element.favorites" :key="item.id">
                 <div class="avatar-box">
                   <img src="@/assets/img/avatar.jpg" alt="" />
                 </div>
@@ -42,6 +42,9 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="favorite-box add-box">
+                <span class="icon-add iconfont"></span>
               </div>
             </div>
           </div>
@@ -230,12 +233,41 @@ const getData = (val) => {
 
     .favorite-title {
       width: 100%;
+      min-width: 100px;
       height: 24px;
+      line-height: 24px;
+      cursor: pointer;
       margin-bottom: 10px;
-      font-size: 18px;
-      font-family: 'ErZhiYuan', sans-serif;
-      font-style: italic;
-      color: @titleFont;
+      display: flex;
+      justify-content: flex-start;
+      align-content: center;
+      
+      .title {
+        font-size: 18px;
+        font-family: 'ErZhiYuan', sans-serif;
+        font-style: italic;
+        color: @titleFont;
+        margin-right: 10px;
+      }
+
+      .icon-bianji {
+        opacity: 0;
+        font-size: 14px;
+        transition: opacity 0.7s ease, transform 0.5s ease;
+
+        &:hover {
+          font-weight: 600;
+          color: @edit;
+          transform: scale(1.2);
+        }
+      }
+
+      &:hover {
+
+        .icon-bianji {
+          opacity: 1;
+        }
+      }
     }
 
     .favorites-box {
@@ -248,13 +280,12 @@ const getData = (val) => {
         width: 210px;
         height: 80px;
         padding: 10px;
-        margin: 10px;
+        margin: 10px 15px;
         border-radius: 10px;
         background: @background;
         box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
         display: flex;
         align-items: center;
-        transition: transform 0.5s ease;
         cursor: pointer;
     
         .avatar-box {
@@ -353,9 +384,47 @@ const getData = (val) => {
             }
           }
         }
-    
+      }
+
+      .main-box {
+        transition: transform 0.7s ease;
+
         &:hover {
           transform: scale(1.03);
+        }
+      }
+
+      .add-box {
+        opacity: 0;
+        box-shadow: none;
+        margin: auto 15px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transition: box-shadow 0.7s ease, opacity 0.7s ease;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        &:hover {
+          box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+          
+          .icon-add {
+            opacity: 1;
+          }
+        }
+
+        .icon-add {
+          opacity: 0.3;
+          font-size: 26px;
+          transition: opacity 0.7s ease;
+        }
+      }
+
+      &:hover {
+
+        .add-box {
+          opacity: 1;
         }
       }
     }

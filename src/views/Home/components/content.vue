@@ -29,7 +29,7 @@ const tabs = ref([
 .content-box {
   width: 100%;
   height: 100%;
-  min-width: 500px;
+  min-width: 566px;
   min-height: 263px;
   margin: 0 auto;
   position: relative;
@@ -42,7 +42,6 @@ const tabs = ref([
     margin-top: 20px;
     width: 100%;
     height: calc(100% - 60px);
-    // min-height: 365px;
     border-radius: 10px;
     background: @background;
     box-shadow: inset 5px 3px 20px #bcbcbc, inset -10px -10px 25px #fefefe;
