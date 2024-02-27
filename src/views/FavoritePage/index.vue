@@ -17,21 +17,22 @@
               <div class="icon-bianji iconfont"></div>
             </div>
             <div class="favorites-box">
-              <div class="favorite-box main-box" v-for="item in element.favorites" :key="item.id">
+              <div class="favorite-box main-box" v-for="item in element.favorites" :key="item.id" @click="editFavorite(item)">
                 <div class="avatar-box">
-                  <img src="https://www.baidu.com/favicon.ico" alt="" />
+                  <img v-if="item.imgSrc !== ''" :src="item.imgSrc" alt="" />
+                  <img v-else src="https://www.baidu.com/favicon.ico" alt="" />
                 </div>
                 <div class="text-box">
                   <div class="text-top">
                     <div class="text-top-right">{{item.title}}</div>
                     <div class="text-top-left">
-                      <div class="point favorite">
+                      <div class="point favorite" @click.stop="test">
                         <span class="icon-shoucang iconfont"></span>
                       </div>
-                      <div class="point edit">
+                      <div class="point edit" @click.stop="test">
                         <span class="icon-bianji iconfont"></span>
                       </div>
-                      <div class="point delete">
+                      <div class="point delete" @click.stop="test">
                         <span class="icon-shanchu iconfont"></span>
                       </div>
                     </div>
@@ -44,7 +45,7 @@
                 </div>
               </div>
               <div class="favorite-box add-box">
-                <span class="icon-add iconfont" @click="showDialogHandle"></span>
+                <span class="icon-add iconfont" @click="showDialogHandle(element.id, 'add')"></span>
               </div>
             </div>
           </div>
@@ -52,27 +53,30 @@
       </template>
     </draggable>
     <transition name="fade">
-      <div class="dialog-content" v-show="showDialog">
+      <div class="dialog-content" v-if="showDialog">
         <div class="dialog-outer-box">
-          <div class="dialog-title">新增网站</div>
+          <div class="dialog-title">{{ dialogOption.title }}</div>
           <div class="dialog-inner-box">
             <div class="dialog-top">
-              <div class="d-avater"></div>
+              <div class="d-avater">
+                <img v-if="tempWebObj.imgSrc" :src="tempWebObj.imgSrc" />
+                <span v-else></span>
+              </div>
               <div class="d-info">
                 <div class="info-url info">
-                  <input placeholder="网站链接" />
+                  <input placeholder="网站链接" v-model="tempWebObj.url" @change="getAvatarHandle" />
                 </div>
                 <div class="info-name info">
-                  <input placeholder="网站名称" />
+                  <input placeholder="网站名称" v-model="tempWebObj.title" />
                 </div>
               </div>
             </div>
             <div class="dialog-bottom">
               <div class="d-desc">
-                <textarea  placeholder="网站描述" />
+                <textarea  placeholder="网站描述" v-model="tempWebObj.description" />
               </div>
               <div class="d-button">
-                <button class="btn confirm">确认</button>
+                <button class="btn confirm" @click="confrimHandle">确认</button>
                 <button class="btn cancel" @click="hiddenDialogHandle">取消</button>
               </div>
             </div>
@@ -234,6 +238,70 @@ const favoriteList = ref([
   },
 ])
 
+const showDialog = ref(false);
+const dialogOption = ref({
+  title: '新增网站',
+  type: 'add'
+})
+
+// 显示对话框
+const showDialogHandle = (id, type) => {
+  showDialog.value = true;
+  tempWebObj.value.fatherId = id;
+  if (type === 'add') {
+    dialogOption.value.title = '新增网站';
+  } else {
+    dialogOption.value.title = '编辑网站';
+  }
+  dialogOption.value.type = type; // 修改对话框显示的内容
+}
+// 隐藏对话框
+const hiddenDialogHandle = () => {
+  showDialog.value = false;
+  Object.assign(tempWebObj.value, webObj())
+}
+
+// 添加新的网站
+const webObj = () => ({
+  imgSrc: '',
+  url: '',
+  title: '',
+  description: '',
+  fatherId: '',
+  id: '',
+})
+const tempWebObj = ref(webObj())
+const confrimHandle = () => {
+  // 校验内容
+  if (!tempWebObj.value.url || !tempWebObj.value.title) return console.log("填写内容");
+  if (dialogOption.value.type === 'add') {
+    const index = favoriteList.value.findIndex(item => item.id === tempWebObj.value.fatherId);
+    favoriteList.value[index].favorites.push(tempWebObj.value)
+    hiddenDialogHandle();
+  } else if (dialogOption.value.type === 'edit') {
+
+  }
+}
+
+// 编辑网站
+const editFavorite = (row) => {
+  Object.assign(tempWebObj.value, row)
+  showDialogHandle(row.id, 'edit')
+}
+
+// 获取网站图标
+const getAvatarHandle = (event) => {
+  const urlArr = event.target.value.split('.');
+  if (urlArr[urlArr.length - 1] === 'com') {
+    tempWebObj.value.imgSrc = 'http://' + event.target.value + '/favicon.ico';
+  }
+}
+
+const test = () => {
+  console.log(1111);
+}
+
+// 移动列表
 const onMoveCallback = () => {
   const items = favoriteList.value;
   let index = 0;
@@ -246,19 +314,6 @@ const onMoveCallback = () => {
 const getData = (val) => {
   // console.log(val);
 };
-
-const showDialog = ref(false);
-
-// 显示对话框
-const showDialogHandle = () => {
-  showDialog.value = true;
-}
-// 隐藏对话框
-const hiddenDialogHandle = () => {
-  showDialog.value = false;
-}
-
-
 </script>
 
 <style scoped lang="less">
@@ -428,6 +483,7 @@ const hiddenDialogHandle = () => {
     
       .main-box {
         transition: transform 0.7s ease;
+        animation: bounce-out .7s ease-in-out;
     
         &:hover {
           transform: scale(1.03);
@@ -520,6 +576,13 @@ const hiddenDialogHandle = () => {
             border-radius: 50%;
             margin-right: 10px;
             box-shadow: inset 5px 5px 10px #cacaca, inset -5px -5px 10px #f6f6f6;
+            display: flex;
+
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
           }
 
           .d-info {
