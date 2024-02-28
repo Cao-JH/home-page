@@ -17,7 +17,7 @@
               <div class="icon-bianji iconfont"></div>
             </div>
             <div class="favorites-box">
-              <div class="favorite-box main-box" v-for="item in element.favorites" :key="item.id" @click="editFavorite(item)">
+              <div class="favorite-box main-box" v-for="item in element.favorites" :key="item.id" @click="redirectTo(item)">
                 <div class="avatar-box">
                   <img v-if="item.imgSrc !== ''" :src="item.imgSrc" alt="" />
                   <img v-else src="https://www.baidu.com/favicon.ico" alt="" />
@@ -26,13 +26,13 @@
                   <div class="text-top">
                     <div class="text-top-right">{{item.title}}</div>
                     <div class="text-top-left">
-                      <div class="point favorite" @click.stop="test">
+                      <div class="point favorite" @click.stop="addFavorite(item)">
                         <span class="icon-shoucang iconfont"></span>
                       </div>
-                      <div class="point edit" @click.stop="test">
+                      <div class="point edit" @click.stop="editFavorite(item)">
                         <span class="icon-bianji iconfont"></span>
                       </div>
-                      <div class="point delete" @click.stop="test">
+                      <div class="point delete" @click.stop="deleteWeb(element.id, item.id)">
                         <span class="icon-shanchu iconfont"></span>
                       </div>
                     </div>
@@ -100,6 +100,7 @@ const favoriteList = ref([
       {
         id: 1,
         imgSrc: '',
+        url: 'www.baidu.com',
         title: '最常222123213去',
         description: '记录卡恩SV老接口萨恩反馈拉我没拿到克拉妹那我蓝开拿饭卡里稳定卡位面',
       },
@@ -279,7 +280,8 @@ const confrimHandle = () => {
     favoriteList.value[index].favorites.push(tempWebObj.value)
     hiddenDialogHandle();
   } else if (dialogOption.value.type === 'edit') {
-
+    console.log('编辑了');
+    hiddenDialogHandle();
   }
 }
 
@@ -299,6 +301,26 @@ const getAvatarHandle = (event) => {
 
 const test = () => {
   console.log(1111);
+}
+
+// 跳转页面
+const redirectTo = (row) => {
+  window.open(`https://${row.url}`);
+}
+
+// 收藏页面
+const addFavorite = (row) => {
+  console.log('添加收藏');
+}
+
+// 删除网站
+const deleteWeb = (fatherId, sonId) => {
+  console.log(fatherId, sonId);
+  const index = favoriteList.value.findIndex(item => item.id === fatherId);
+  console.log(index, 'index');
+  console.log(favoriteList.value[index], 'favoriteList.value');
+  if ( index === -1 ) return;
+  favoriteList.value[index].favorites = favoriteList.value[index].favorites.filter(item => item.id !== sonId);
 }
 
 // 移动列表
